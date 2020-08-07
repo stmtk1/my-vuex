@@ -1,41 +1,32 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
+import MyVuex from './state.js'
 
-let state = {}
-
-function getState(name) {
-    return state[name]
-}
-
-function setState(name, value) {
-    state[name] = value
-    return value
-}
-
-const $store = { get: getState, set: setState };
-
-function beforeCreate() {
-    if (typeof this.$options.store !== 'object') {
-        console.err('store is not object')
-        return
-    }
-    state = {...this.$options.store}
-    this.$store = $store
-}
-
-const MyVuex = {
-    install: (vue, options) => {
-        vue.mixin({ beforeCreate }
-        )
-    },
-};
 
 Vue.use(MyVuex)
+Vue.use(VueRouter)
+
+const Foo = { template: "<div>foo</div>"}
+const Bar = { template: "<div>bar</div>"}
+const IndexPage = { template: "<div>index</div>"}
+
+const routes = [
+    { path: '/foo', component: Foo },
+    { path: '/bar', component: Bar },
+    { path: '/', component: IndexPage },
+]
+
+const router = new VueRouter({
+    routes
+})
+
+Vue.component('hello-world', {
+    template: '<div>hello world</div>',
+})
 
 const app = new Vue({
+    router,
     el: '#app',
-    data: () => {
-        return { message: 'hello world' }
-    },
     created: function() {
         this.$store.set('message', 'hello world vuex')
     },

@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "vue": "^2.6.11",
+    "vue-router": "^3.3.4",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
